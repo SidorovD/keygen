@@ -1,6 +1,6 @@
 # Key generator
 
-KeyGen REST-API is a 4-symbol key generator consisting of uppercase and lowercase letters of the Latin alphabet, as well as numbers.
+KeyGen is a REST-API 4-symbol key generator consisting of uppercase and lowercase letters of the Latin alphabet, as well as numbers.
 
 ## Quick start
 
