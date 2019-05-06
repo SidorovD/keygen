@@ -1,0 +1,6 @@
+# remove all dev info from image
+.git
+.gitignore
+Dockerfile
+Makefile
+README.md

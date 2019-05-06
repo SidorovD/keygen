@@ -3,3 +3,6 @@ all:
 
 docker:
 	docker build -t sidorovd/keygen .
+
+clean:
+	rm api
