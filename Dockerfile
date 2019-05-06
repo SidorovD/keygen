@@ -2,6 +2,7 @@
 FROM golang:1.12-alpine as build
 WORKDIR /go/src/keygen
 COPY . .
+RUN CGO_ENABLED=0 go test ./...
 # we should turn off the cgo to run from scratch
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o api cmd/keygenapi/main.go
 
