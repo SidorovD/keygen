@@ -65,7 +65,7 @@ func TestKeyGenerator_Submit(t *testing.T) {
 	}
 }
 
-func TestKeyGenerator_Submit_keyDoesNotIssued(t *testing.T) {
+func TestKeyGenerator_Submit_keyWasNotIssued(t *testing.T) {
 	setUp()
 
 	// not issued key
@@ -80,8 +80,8 @@ func TestKeyGenerator_Submit_keyDoesNotIssued(t *testing.T) {
 		t.Fatalf("want: %v, got: %v", KeyStatus_NotIssued, st)
 	}
 
-	if err := kg.Submit(key); err == nil {
-		t.Error("want: err, got: nil")
+	if err := kg.Submit(key); err != ErrKeyWasNotIssued {
+		t.Errorf("want: %v, got: %v", ErrKeyWasNotIssued, err)
 	}
 }
 
@@ -102,12 +102,12 @@ func TestKeyGenerator_Submit_keySubmitted(t *testing.T) {
 		t.Fatal("key not submitted")
 	}
 
-	if err := kg.Submit(key); err == nil {
-		t.Error("want: err, got: nil")
+	if err := kg.Submit(key); err != ErrKeyWasAlreadySubmitted {
+		t.Errorf("want: %v, got: %v", ErrKeyWasAlreadySubmitted, err)
 	}
 }
 
-func TestKeyGen_NotUsedKeysCount(t *testing.T) {
+func TestKeyGen_FreeKeysCount(t *testing.T) {
 	setUp()
 
 	if n := kg.FreeKeysCount(); n != NOfCombinations {

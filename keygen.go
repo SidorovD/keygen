@@ -8,9 +8,9 @@ import (
 
 const (
 	// 26+26+10
-	letterBytes     = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+	letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
-	keyLen          = 4
+	keyLen = 4
 
 	// Total number of all posible combinations
 	// (26+26+10)^4
@@ -109,7 +109,7 @@ func (g *keyGen) Submit(key string) error {
 	k, err := g.store.Get(key)
 	if err != nil {
 		if err == ErrKeyDoesNotExist {
-			return ErrKeyHasNotBeenIssued
+			return ErrKeyWasNotIssued
 		}
 
 		log.Panic(err)

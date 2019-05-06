@@ -46,7 +46,7 @@ func (a *api) submitKeyHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := a.service.Submit(key); err != nil {
-		if err == keygen.ErrKeyMustBeAKeyLenSymbols || err == keygen.ErrKeyHasNotBeenIssued || err == keygen.ErrKeyHasBeenAlreadySubmitted {
+		if err == keygen.ErrKeyMustBeAKeyLenSymbols || err == keygen.ErrKeyWasNotIssued || err == keygen.ErrKeyWasAlreadySubmitted {
 			log.Print(err)
 
 			writeWithHeader(w, http.StatusBadRequest, []byte(err.Error()))

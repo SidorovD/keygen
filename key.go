@@ -13,8 +13,8 @@ const (
 )
 
 var (
-	ErrKeyHasNotBeenIssued        = errors.New("Key.Submit: key has not been issued")
-	ErrKeyHasBeenAlreadySubmitted = errors.New("Key.Submit: key already submitted")
+	ErrKeyWasNotIssued        = errors.New("Key.Submit: key has not been issued")
+	ErrKeyWasAlreadySubmitted = errors.New("Key.Submit: key already submitted")
 )
 
 type Key struct {
@@ -39,12 +39,13 @@ func (k *Key) Status() KeyStatus {
 }
 
 func (k *Key) submit() error {
-	if !k.isIssued() {
-		return ErrKeyHasNotBeenIssued
+	// !k.isSubmitted() hack
+	if !k.isIssued() && !k.isSubmitted() {
+		return ErrKeyWasNotIssued
 	}
 
 	if k.isSubmitted() {
-		return ErrKeyHasBeenAlreadySubmitted
+		return ErrKeyWasAlreadySubmitted
 	}
 
 	k.status = KeyStatus_Submitted
